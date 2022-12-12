@@ -18,6 +18,9 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <?php wp_nav_menu('theme_location=top'); ?> <!--вывод верхнего меню (настройки через админ панель)-->
         </div>
+
+        
+
     </div>
 </nav>
 <main class="container">
