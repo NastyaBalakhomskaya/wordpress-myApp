@@ -35,3 +35,35 @@ add_action('wp_enqueue_scripts', 'add_stylesheet');
 add_action('widgets_init', 'register_widget_right');
 
 add_theme_support('post-thumbnails');
+
+add_action('init','register_event_post_type');
+function register_event_post_type(): void
+{
+    register_post_type('event', [
+        'label' => 'Events',
+        'labels' => [
+            'name'=> 'Events',
+            'singular_name'=>'Event',
+        ],
+        'public' => true,
+        'rewrite' => ['slug' =>'events'],
+        'has_archive' => true,
+        'show_in_rest' => true,
+        'supports' => ['title', 'editor', 'thumbnail', 'comments'],
+        'menu_icon' => 'dashicons-pets',
+
+    ]);
+
+    register_taxonomy('event_category', ['event'], [
+        'hierarchical' => false,
+        'labels' => [
+            'name' => 'Event Category',
+            'singular_name' => 'Event Category',
+        ],
+        'show_ui' => true,
+        'show_in_rest' => true,
+        'show_admin_column' => true,
+        'query_var' => true,
+        'rewrite' => ['slug'=>'events_category'],
+    ]);
+}
