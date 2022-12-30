@@ -34,7 +34,8 @@ function  register_widget_right (){
 add_action('wp_enqueue_scripts', 'add_stylesheet');
 add_action('widgets_init', 'register_widget_right');
 
-add_theme_support('post-thumbnails');
+//add_theme_support('post-thumbnails');
+
 
 add_action('init','register_event_post_type');
 function register_event_post_type(): void
