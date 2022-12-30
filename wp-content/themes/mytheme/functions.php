@@ -68,3 +68,13 @@ function register_event_post_type(): void
         'rewrite' => ['slug'=>'events_category'],
     ]);
 }
+
+add_action('pre_get_posts', 'add_post_types_to_query');
+
+function add_post_types_to_query(WP_Query $query) : void
+{
+    if (is_home() && $query->is_main_query()) {
+        $query->set('post_type', ['post', 'event']);
+
+    }
+}

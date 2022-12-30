@@ -24,6 +24,21 @@
                     </small>
                     <?php the_tags(); ?> <!--отображает теги для сообщения-->
                     <?php the_excerpt(); ?> <!--отображение отрывка начала поста-->
+
+                <!--добавление отображения кастомных полей для event-->
+                <div class="entry-content">
+                    <div class="post-taxonomies">
+                        <?php the_terms(get_the_ID(), 'event_category', '<span class="cat-links">', ',', '</span>'); ?>
+                    </div>
+                    <div class="entry-content">
+                        <p> Date start: <?php the_field('date_start'); ?></p>
+                        <p> Date finish: <?php the_field('date_finish'); ?></p>
+                        <p> Price: <?php the_field('price'); ?></p>
+                    </div>
+                    <?php the_content(); ?>
+                </div>
+                <!---->
+
                     <a href="<?php the_permalink(); ?>" class="btn btn-primary shadow-none">
                         Читать дальше
                     </a>
