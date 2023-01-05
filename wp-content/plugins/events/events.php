@@ -1,9 +1,9 @@
 <?php
 /**
-* Plugin Name: Events
-* Description: Wordpress Events
-* Version: 0.1
-*/
+ * Plugin Name: Events
+ * Description: Wordpress Events
+ * Version: 0.1
+ */
 
 class EventsPlugin
 {
@@ -31,21 +31,21 @@ class EventsPlugin
     }
 
     public function register_event_post_type(): void
-{
-    register_post_type('event', [
-        'label' => 'Events',
-        'labels' => [
-            'name'=> 'Events',
-            'singular_name'=>'Event',
-        ],
-        'public' => true,
-        'rewrite' => ['slug' =>'events'],
-        'has_archive' => true,
-        'show_in_rest' => true,
-        'supports' => ['title', 'editor', 'thumbnail', 'comments'],
-        'menu_icon' => 'dashicons-pets',
+    {
+        register_post_type('event', [
+            'label' => 'Events',
+            'labels' => [
+                'name' => 'Events',
+                'singular_name' => 'Event',
+            ],
+            'public' => true,
+            'rewrite' => ['slug' => 'events'],
+            'has_archive' => true,
+            'show_in_rest' => true,
+            'supports' => ['title', 'editor', 'thumbnail', 'comments'],
+            'menu_icon' => 'dashicons-pets',
 
-    ]);
+        ]);
 
         register_taxonomy('event_category', ['event'], [
             'hierarchical' => false,
@@ -57,10 +57,10 @@ class EventsPlugin
             'show_in_rest' => true,
             'show_admin_column' => true,
             'query_var' => true,
-            'rewrite' => ['slug'=>'events_category'],
+            'rewrite' => ['slug' => 'events_category'],
         ]);
 
-        if( function_exists('acf_add_local_field_group') ):
+        if (function_exists('acf_add_local_field_group')):
 
             acf_add_local_field_group(array(
                 'key' => 'group_639b6dcdb4ef6',
@@ -118,35 +118,3 @@ register_activation_hook(__FILE__, [$plugin, 'activate']);
 register_deactivation_hook(__FILE__, [$plugin, 'deactivate']);
 register_uninstall_hook(__FILE__, [$plugin, 'uninstall']);
 
-
-function event_post_type_options_page(): void
-{
-    add_menu_page(
-        'Event Settings',
-        'Event Settings',
-        'manage_options',
-        'event_settings',
-        'event_settings_page',
-    );
-}
-
-add_action('admin_menu', 'event_post_type_options_page');
-
-function event_settings_page(): void
-{
-    ?>
-    <h1><?= get_admin_page_title(); ?></h1>
-    <form method="post" action="options.php">
-        <?php
-        settings_fields('event_type_settings');
-        do_settings_sections('event_settings');
-        submit_button();
-        ?>
-    </form>
-    <?php
-}
-
-function event_settings_fields()
-{
-    register_setting('event_type_settings', 'default_rating');
-}
